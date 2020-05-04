@@ -4,16 +4,16 @@
     <h2 class="teal-text center">Vue Chat</h2>
     <div class="card">
       <div class="card-content">
-          <ul class="messages">
+          <ul class="messages" v-chat-scroll>
               <li v-for="msg in messages" :key="msg.id" >
                   <div class="msg-container" v-if="msg.name !== name">
-                        <span class="teal-text">{{ msg.name }}: </span>
-                        <span class="grey-text text-darken-3">{{ msg.message }} </span>
+                        <span class="teal-text name">{{ msg.name }}: </span>
+                        <span class="grey-text text-darken-3 message">{{ msg.message }} </span>
                         <span class="grey-text time">{{ msg.timestamp }}</span>
                   </div>
                   <div class="self-container" v-if="msg.name === name">
-                        <span class="teal-text">{{ msg.name }}: </span>
-                        <span class="grey-text text-darken-3">{{ msg.message }} </span>
+                        <span class="teal-text name">{{ msg.name }}: </span>
+                        <span class="grey-text text-darken-3 message">{{ msg.message }} </span>
                         <span class="grey-text time">{{ msg.timestamp }}</span>
                   </div>
               </li>
@@ -106,20 +106,34 @@ export default {
     padding: 10px 20px;
     position: relative;
     max-width: 300px;
-    right: -90px;
     border-radius: 10px 40px 2px 20px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
     margin: 10px 0;
 }
 
 .chat span {
-    font-size: 1.1em;
+    font-size: 1.0em;
+}
+
+.chat .name,
+.chat .message {
+    display: block;
+}
+
+.chat .name {
+    font-size: 0.9em;
+    font-weight: bolder;
+
 }
 
 .chat .time {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.7em;
     font-style: italic;
+}
+
+.chat .self-container .name {
+    color: orangered!important;
 }
 
 .chat .messages::-webkit-scrollbar {
@@ -131,7 +145,7 @@ export default {
 }
 
 .chat .messages::-webkit-scrollbar-thumb {
-    background: rgb(233, 233, 123);
+    background: orangered;
 }
 
 
