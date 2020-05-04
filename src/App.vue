@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <router-link :to="{ name: 'Welcome' }"><img src="@/assets/logo.png" width="50px" class="image" /></router-link>
     <router-view/>
   </div>
 </template>
@@ -12,12 +12,12 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+#app .image {
+  position: absolute;
+  top: 20px;
+  left: 48%;
+  bottom: 100px;
+  translate: transform(-50%, -50%);
 }
 </style>
