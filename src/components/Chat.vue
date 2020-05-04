@@ -5,10 +5,17 @@
     <div class="card">
       <div class="card-content">
           <ul class="messages">
-              <li v-for="msg in messages" :key="msg.id">
-                  <span class="teal-text">{{ msg.name }}: </span>
-                  <span class="grey-text text-darken-3">{{ msg.message }} </span>
-                  <span class="grey-text time">{{ msg.timestamp }}</span>
+              <li v-for="msg in messages" :key="msg.id" >
+                  <div class="msg-container" v-if="msg.name !== name">
+                        <span class="teal-text">{{ msg.name }}: </span>
+                        <span class="grey-text text-darken-3">{{ msg.message }} </span>
+                        <span class="grey-text time">{{ msg.timestamp }}</span>
+                  </div>
+                  <div class="self-container" v-if="msg.name === name">
+                        <span class="teal-text">{{ msg.name }}: </span>
+                        <span class="grey-text text-darken-3">{{ msg.message }} </span>
+                        <span class="grey-text time">{{ msg.timestamp }}</span>
+                  </div>
               </li>
           </ul>
       </div>
@@ -69,7 +76,7 @@ export default {
 }
 
 .chat .card-content {
-    background: var(--image);
+    background: teal;
 }
 
 .chat h2 {
@@ -78,12 +85,26 @@ export default {
 
 .chat .messages {
     max-width: 300px;
+    position: relative;
+    min-height: 500px;
 }
 
-.chat li {
+.chat .msg-container {
     background: white;
     padding: 10px 20px;
+    position: relative;
+    left: 0;
     border-radius: 40px 10px 20px 2px;
+    box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
+    margin: 10px 0;
+}
+
+.chat .self-container {
+    background: rgb(233, 233, 123);
+    padding: 10px 20px;
+    position: relative;
+    right: -90px;
+    border-radius: 10px 40px 2px 20px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
     margin: 10px 0;
 }
