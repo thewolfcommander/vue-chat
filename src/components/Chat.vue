@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import db from '@/firebase/init'
 import NewMessage from '@/components/NewMessage'
 
@@ -42,7 +43,7 @@ export default {
     };
   },
   created() {
-      let ref = db.collection('messages')
+      let ref = db.collection('messages').orderBy('timestamp')
 
       ref.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
@@ -52,7 +53,7 @@ export default {
                   id: doc.id,
                   name: doc.data().name,
                   message: doc.data().message,
-                  timestamp: doc.data().timestamp
+                  timestamp: moment(doc.data().timestamp).format('lll')
               })
           })
       })
@@ -84,14 +85,15 @@ export default {
 }
 
 .chat .messages {
-    max-width: 300px;
     position: relative;
-    min-height: 500px;
+    max-height: 300px;
+    overflow: auto;
 }
 
 .chat .msg-container {
     background: white;
     padding: 10px 20px;
+    max-width: 300px;
     position: relative;
     left: 0;
     border-radius: 40px 10px 20px 2px;
@@ -103,6 +105,7 @@ export default {
     background: rgb(233, 233, 123);
     padding: 10px 20px;
     position: relative;
+    max-width: 300px;
     right: -90px;
     border-radius: 10px 40px 2px 20px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
@@ -117,6 +120,18 @@ export default {
     display: block;
     font-size: 0.9em;
     font-style: italic;
+}
+
+.chat .messages::-webkit-scrollbar {
+    width: 3px;
+}
+
+.chat .messages::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+.chat .messages::-webkit-scrollbar-thumb {
+    background: rgb(233, 233, 123);
 }
 
 
