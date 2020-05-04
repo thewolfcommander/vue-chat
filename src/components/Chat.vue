@@ -77,7 +77,7 @@ export default {
 }
 
 .chat .card-content {
-    background: teal;
+    background: var(--image);
 }
 
 .chat h2 {
@@ -96,7 +96,7 @@ export default {
     max-width: 300px;
     position: relative;
     left: 0;
-    border-radius: 40px 10px 20px 2px;
+    border-radius: 40px 10px 40px 2px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
     margin: 10px 0;
 }
@@ -106,7 +106,7 @@ export default {
     padding: 10px 20px;
     position: relative;
     max-width: 300px;
-    border-radius: 10px 40px 2px 20px;
+    border-radius: 10px 40px 2px 40px;
     box-shadow: 1px 4px 8px rgba(0,0,0,0.25);
     margin: 10px 0;
 }
