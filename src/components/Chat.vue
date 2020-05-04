@@ -1,6 +1,5 @@
 <template>
   <div class="chat container">
-
     <h2 class="teal-text center">Vue Chat</h2>
     <div class="card">
       <div class="card-content">
@@ -13,7 +12,7 @@
                   </div>
                   <div class="self-container" v-if="msg.name === name">
                         <span class="teal-text name">{{ msg.name }}: </span>
-                        <span class="grey-text text-darken-3 message">{{ msg.message }} </span>
+                        <span class="grey-text text-darken-3 message">{{ msg.message }} <i class="material-icons delete" @click="deleteMessage(msg, name)">delete</i> </span>
                         <span class="grey-text time">{{ msg.timestamp }}</span>
                   </div>
               </li>
@@ -57,6 +56,19 @@ export default {
               })
           })
       })
+  },
+  methods: {
+      deleteMessage(msg, name) {
+          if (msg.name === name) {
+              db.collection('messages').doc(msg.id).delete().then(() => {
+                  this.messages = this.messages.filter(message => {
+                      return message.id !== msg.id
+                  })
+              }).catch(err => {
+                      console.log(err)
+                  })
+          }
+      }
   }
 };
 </script>
@@ -77,7 +89,7 @@ export default {
 }
 
 .chat .card-content {
-    background: var(--image);
+    background: teal;
 }
 
 .chat h2 {
@@ -146,6 +158,15 @@ export default {
 
 .chat .messages::-webkit-scrollbar-thumb {
     background: orangered;
+}
+
+.chat .delete {
+    font-size: 1.4em;
+    position: absolute;
+    right: 6px;
+    bottom: 2px;
+    cursor: pointer;
+    color: orangered;
 }
 
 
